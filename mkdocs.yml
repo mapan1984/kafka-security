@@ -1,0 +1,79 @@
+site_name: kafka 认证，鉴权，加密
+site_url: https://mapan1984.github.io/kafka-security/
+repo_url: https://github.com/mapan1984/kafka-security/
+site_description: kafka 认证，鉴权，加密
+site_author: mapan
+
+nav:
+  - 0. kafka 认证，鉴权，加密: 'README.md'
+  - 1. Security Protocol 概览:
+    - '1-security protocol 概览/README.md'
+  - 2. SSL protocol 支持:
+    - '2-SSL protocol 支持/README.md'
+    - 2.1 create ca and cert: '2-SSL protocol 支持/1-create-ca-and-cert.md'
+    - 2.2 Broker Config: '2-SSL protocol 支持/2-broker config.md'
+    - 2.3 Client Config: '2-SSL protocol 支持/3-client config.md'
+    - 2.4 ssl 原理概述: '2-SSL protocol 支持/4-ssl.md'
+  - 3. SASL protocol 支持:
+    - '3-SASL protocol 支持/README.md'
+    - 3.1 PLAIN Mechanisms: '3-SASL protocol 支持/1-PLAIN mechanisms.md'
+    - 3.2 SCRAM Mechanisms: '3-SASL protocol 支持/2-SCRAM mechanisms.md'
+    - 3.3 GSSAPI Mechanisms: '3-SASL protocol 支持/3-GSSAPI mechanisms.md'
+    - 3.4 JAAS 配置方式: '3-SASL protocol 支持/4-JAAS config.md'
+  - 4. 权限控制 acl:
+    - '4-权限控制 acl/README.md'
+    - 4.1 开启权限控制: '4-权限控制 acl/1-开启权限控制.md'
+    - 4.2 确定 Principal: '4-权限控制 acl/2-确定 Principal.md'
+    - 4.3 定位 acl: '4-权限控制 acl/3-定位 acl.md'
+    - 4.4 命令行工具: '4-权限控制 acl/4-命令行工具.md'
+  - 5. 其他相关配置:
+    - '5-其他相关配置/README.md'
+    - 5.1 监听地址: '5-其他相关配置/1-监听地址.md'
+    - 5.2 JAAS 配置文件规则: '5-其他相关配置/2-JAAS-配置文件.md'
+    - 5.3 SASL 监听支持多种机制: '5-其他相关配置/3-SASL 监听支持多种机制.md'
+  - 6. zookeeper 认证支持:
+    - '6-zookeeper 认证支持/README.md'
+
+
+
+# docs_dir: docs
+
+theme:
+  # name: readthedocs
+  name: material
+  language: 'zh'
+  features:
+    - navigation.expand
+    - navigation.top
+  # palette:
+  #   scheme: slate
+  #   primary: blue grey
+  #   accent: deep orange
+  palette: 
+    - scheme: default
+      primary: blue grey
+      accent: deep orange
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate 
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+
+plugins:
+  - section-index
+  - search:
+      lang:
+        - en
+        - ja
+
+extra_css: []
+
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.snippets
+  - tables

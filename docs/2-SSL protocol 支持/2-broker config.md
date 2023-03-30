@@ -5,14 +5,21 @@
 监听地址，当对 client 暴露的地址与本地监听地址不一致时，使用 `advertised.listeners`：
 
 ``` jproperties
-listeners=PLAINTEXT://:9092,SSL://:9093
-advertised.listeners=PLAINTEXT://192.168.16.5:9092,SSL://180.76.140.179:9093
+# listeners=PLAINTEXT://:9092,SSL://:9093
+listeners=BROKER://:9092,CLIENT://:9093
+
+# advertised.listeners=PLAINTEXT://192.168.16.5:9092,SSL://180.76.140.179:9093
+advertised.listeners=BROKER://192.168.0.192:9092,CLIENT://192.168.0.192:9093
+
+listener.security.protocol.map=BROKER:PLAINTEXT,CLIENT:SSL
 ```
 
 broker 内部连接使用的协议：
 
 ``` jproperties
-security.inter.broker.protocol=PLAINTEXT
+# security.inter.broker.protocol=PLAINTEXT
+
+inter.broker.listener.name=BROKER
 ```
 
 keystore 与 truststore 的位置与密码：
@@ -111,3 +118,7 @@ ssl.principal.mapping.rules
     ---
 
 如果获取不到证书信息，则 SSL 访问不正常
+
+提取 `client.truststore.jks` 中包含的 cafile，验证服务端连接与证书
+
+    openssl s_client -verify 100 -showcerts -connect 106.12.163.91:9095 -CAfile <(keytool -list -rfc -keystore client.truststore.jks -storepass storepass)

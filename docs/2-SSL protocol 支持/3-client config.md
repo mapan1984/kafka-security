@@ -25,4 +25,10 @@ ssl.protocol = TLSv1.2
 
 ## 使用
 
-    bin/kafka-console-consumer.sh --bootstrap-server 180.76.140.179:9093 --topic __test  --from-beginning --consumer.config client_security.properties
+生产
+
+    bin/kafka-console-producer.sh --bootstrap-server 180.76.140.179:9093 --topic __test --producer.config client_security.properties
+
+消费
+
+    bin/kafka-console-consumer.sh --bootstrap-server 180.76.140.179:9093 --topic __test --from-beginning --consumer.config client_security.properties

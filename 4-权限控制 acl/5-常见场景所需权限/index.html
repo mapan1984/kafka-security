@@ -687,6 +687,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    权限之间有隐含的包含关系
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#producer-acls" class="md-nav__link">
     Producer Acls
   </a>
@@ -701,7 +708,14 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#follower" class="md-nav__link">
+    Follower
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
     参考
   </a>
   
@@ -725,22 +739,39 @@
                 
                 
                 <h1 id="45">4.5 常见场景所需权限</h1>
+<h2 id="_1">权限之间有隐含的包含关系</h2>
+<p>https://github.com/apache/kafka/blob/trunk/clients/src/main/java/org/apache/kafka/common/acl/AclOperation.java</p>
+<p>Represents an operation which an ACL grants or denies permission to perform.</p>
+<p>Some operations imply other operations:</p>
+<ul>
+<li><code>ALLOW ALL</code> implies <code>ALLOW</code> everything</li>
+<li><code>DENY ALL</code> implies <code>DENY</code> everything</li>
+<li><code>ALLOW READ</code> implies <code>ALLOW DESCRIBE</code></li>
+<li><code>ALLOW WRITE</code> implies <code>ALLOW DESCRIBE</code></li>
+<li><code>ALLOW DELETE</code> implies <code>ALLOW DESCRIBE</code></li>
+<li><code>ALLOW ALTER</code> implies <code>ALLOW DESCRIBE</code></li>
+<li><code>ALLOW ALTER_CONFIGS</code> implies <code>ALLOW DESCRIBE_CONFIGS</code></li>
+</ul>
+<p>The API for this class is still evolving and we may break compatibility in minor releases, if necessary.</p>
 <h2 id="producer-acls">Producer Acls</h2>
 <table>
 <thead>
 <tr>
 <th>AclOperation</th>
 <th>ResourceType</th>
+<th>说明</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>WRITE</code></td>
-<td><code>Topic</code></td>
-<td></td>
+<td>WRITE</td>
+<td>Topic</td>
+<td>生产者写 Topic 必须有的权限</td>
+<td>addPartitionsToTxn</td>
 </tr>
 <tr>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -748,14 +779,17 @@
 <tr>
 <td>WRITE</td>
 <td>TransactionalId</td>
-<td></td>
+<td>生产者事务写，即设置 transactional.id，必须有此权限</td>
+<td>initProducerId,addPartitionsToTxn,addOffsetsToTxn,endTxn</td>
 </tr>
 <tr>
 <td>DESCRIBE</td>
 <td>TransactionalId</td>
+<td>生产者寻找 transaction coordinator 时需要此权限</td>
 <td>handleFindCoordinatorRequest</td>
 </tr>
 <tr>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -763,9 +797,11 @@
 <tr>
 <td>IDEMPOTENT_WRITE</td>
 <td>Cluster</td>
-<td></td>
+<td>生产者幂等写时需要此权限</td>
+<td>initProducerId,</td>
 </tr>
 <tr>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -773,35 +809,108 @@
 <tr>
 <td>CREATE</td>
 <td>Topic</td>
-<td></td>
+<td>生产者自动创建 Topic</td>
+<td>Metadata,createTopic</td>
 </tr>
 <tr>
 <td>CREATE</td>
 <td>Cluster</td>
-<td></td>
+<td>生产者自动创建 Topic，如果有 Cluster 的权限，则不需要 Topic 的权限</td>
+<td>Metadata,createTopic</td>
 </tr>
 <tr>
 <td>DESCRIBE</td>
 <td>Topic</td>
+<td>ListOffsets, Metadata</td>
 <td></td>
 </tr>
 <tr>
 <td>ALTER</td>
 <td>Topic</td>
+<td>增加分区</td>
 <td></td>
 </tr>
 </tbody>
 </table>
 <h2 id="consumer-acls">Consumer Acls</h2>
-<p>READ Topic
-READ Group</p>
-<p>CLUSTER_ACTION Cluster: follower 的用户必须对 <code>CLUSTER</code> 有 <code>ClusterAction</code> 权限，才能从 leader 拉取 partition 数据</p>
-<p>DESCRIBE Topic,
-DESCRIBE Group: consumer 的用户必须对 <code>topic</code> 和 <code>group</code> 都有 <code>DESCRIBE</code> 权限，才能获取到 topic 的 offset 以及 consumer 的分配信息以及 offset</p>
-<p>DESCRIBE Cluster: list groups 操作需要 <code>CLUSTER</code> 的 <code>DESCRIBE</code> 权限</p>
-<h2 id="_1">参考</h2>
+<table>
+<thead>
+<tr>
+<th>AclOperation</th>
+<th>ResourceType</th>
+<th>说明</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>READ</td>
+<td>Topic</td>
+<td>消费者读取 Topic 必须有的权限</td>
+<td>offsetCommit</td>
+</tr>
+<tr>
+<td>READ</td>
+<td>Group</td>
+<td>消费者读取 Topic 必须有的权限</td>
+<td>offsetCommit,joinGroup,heartbeat,leaveGroup,syncGroup,addOffsetsToTxn</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DESCRIBE</td>
+<td>Group</td>
+<td>consumer 的用户必须对 <code>topic</code> 和 <code>group</code> 都有 <code>DESCRIBE</code> 权限，才能 fetchOffsets</td>
+<td>offsetFetch,findCoordinator,describeGroup</td>
+</tr>
+<tr>
+<td>DESCRIBE</td>
+<td>Topic</td>
+<td>ListOffsets, Metadata</td>
+<td>offsetFetch</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DESCRIBE</td>
+<td>Cluster</td>
+<td>list groups 操作需要 <code>CLUSTER</code> 的 <code>DESCRIBE</code> 权限</td>
+<td>listGroups</td>
+</tr>
+</tbody>
+</table>
+<h2 id="follower">Follower</h2>
+<table>
+<thead>
+<tr>
+<th>AclOperation</th>
+<th>ResourceType</th>
+<th>说明</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLUSTER_ACTION</td>
+<td>Cluster</td>
+<td>follower 的用户必须对 <code>CLUSTER</code> 有 <code>ClusterAction</code> 权限，才能从 leader 拉取 partition 数据</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">参考</h2>
 <ul>
 <li>https://medium.com/@nzaporozhets/getting-started-with-kafka-acls-14b16bbf83d1</li>
+<li>https://docs.confluent.io/platform/current/kafka/authorization.html#operations</li>
+<li>https://kafka.apache.org/27/documentation.html#operations_resources_and_protocols</li>
 </ul>
                 
               

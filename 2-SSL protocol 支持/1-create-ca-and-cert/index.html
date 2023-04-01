@@ -344,36 +344,30 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-ssl-key-certificate" class="md-nav__link">
-    1. 创建 SSL key 和 Certificate
+  <a href="#1-ca-certificate-authority" class="md-nav__link">
+    1. 创建 CA (certificate authority)
   </a>
-  
-    <nav class="md-nav" aria-label="1. 创建 SSL key 和 Certificate">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    主机名验证
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-ca-certificate-authority" class="md-nav__link">
-    2. 创建你自己的 CA (certificate authority)
+  <a href="#2-truststore" class="md-nav__link">
+    2. 生成 truststore 文件
   </a>
   
-    <nav class="md-nav" aria-label="2. 创建你自己的 CA (certificate authority)">
+    <nav class="md-nav" aria-label="2. 生成 truststore 文件">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#kafka-broker-require-client-authentication" class="md-nav__link">
-    kafka broker require client authentication
+  <a href="#21-clienttruststorejks" class="md-nav__link">
+    2.1 client.truststore.jks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22servertruststorejks" class="md-nav__link">
+    2.2（可选）server.truststore.jks
   </a>
   
 </li>
@@ -385,7 +379,47 @@
       
         <li class="md-nav__item">
   <a href="#3" class="md-nav__link">
-    3. 签名证书
+    3. 生成服务端证书
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 生成服务端证书">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-ssl-key" class="md-nav__link">
+    3.1 创建服务端 SSL key
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 创建服务端 SSL key">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311-host-name-verification" class="md-nav__link">
+    3.1.1 主机名验证(host name verification)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    3.2 签名证书
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4.（可选）生成客户端证书
   </a>
   
 </li>
@@ -774,36 +808,30 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-ssl-key-certificate" class="md-nav__link">
-    1. 创建 SSL key 和 Certificate
+  <a href="#1-ca-certificate-authority" class="md-nav__link">
+    1. 创建 CA (certificate authority)
   </a>
-  
-    <nav class="md-nav" aria-label="1. 创建 SSL key 和 Certificate">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    主机名验证
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-ca-certificate-authority" class="md-nav__link">
-    2. 创建你自己的 CA (certificate authority)
+  <a href="#2-truststore" class="md-nav__link">
+    2. 生成 truststore 文件
   </a>
   
-    <nav class="md-nav" aria-label="2. 创建你自己的 CA (certificate authority)">
+    <nav class="md-nav" aria-label="2. 生成 truststore 文件">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#kafka-broker-require-client-authentication" class="md-nav__link">
-    kafka broker require client authentication
+  <a href="#21-clienttruststorejks" class="md-nav__link">
+    2.1 client.truststore.jks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22servertruststorejks" class="md-nav__link">
+    2.2（可选）server.truststore.jks
   </a>
   
 </li>
@@ -815,7 +843,47 @@
       
         <li class="md-nav__item">
   <a href="#3" class="md-nav__link">
-    3. 签名证书
+    3. 生成服务端证书
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 生成服务端证书">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-ssl-key" class="md-nav__link">
+    3.1 创建服务端 SSL key
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 创建服务端 SSL key">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311-host-name-verification" class="md-nav__link">
+    3.1.1 主机名验证(host name verification)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    3.2 签名证书
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4.（可选）生成客户端证书
   </a>
   
 </li>
@@ -838,7 +906,32 @@
                 
                 
                 <h1 id="20-ca-certificate">2.0 创建 CA 和 Certificate</h1>
-<h2 id="1-ssl-key-certificate">1. 创建 SSL key 和 Certificate</h2>
+<h2 id="1-ca-certificate-authority">1. 创建 CA (certificate authority)</h2>
+<div class="highlight"><pre><span></span><code>openssl req -new -x509 -keyout ca-key -out ca-cert -days 36500
+</code></pre></div>
+<ul>
+<li>ca-key: private and public key</li>
+<li>ca-cert: ca 自身的证书，自签名</li>
+</ul>
+<h2 id="2-truststore">2. 生成 truststore 文件</h2>
+<h3 id="21-clienttruststorejks">2.1 client.truststore.jks</h3>
+<p>将 ca 自身的证书 ca-cert 添加到 client.truststore.jks 中，客户端持有 client.truststore.jks 后可信任此 ca</p>
+<div class="highlight"><pre><span></span><code>keytool -import -keystore client.truststore.jks -alias CARoot -file ca-cert
+</code></pre></div>
+<p>验证 truststore 内容：</p>
+<div class="highlight"><pre><span></span><code>keytool -list -v -keystore client.truststore.jks [-storepass &lt;storepass&gt;]
+
+keytool -list -rfc -keystore client.truststore.jks [-storepass &lt;storepass&gt;]
+</code></pre></div>
+<h3 id="22servertruststorejks">2.2（可选）server.truststore.jks</h3>
+<p>如果需要双向认证，即让 kafka broker 验证 client 的证书，在 broker 端设置 <code>ssl.client.auth=required</code>。</p>
+<p>同时 broker 端也需要 truststore 文件，包含签发 client 端证书的 ca 证书。</p>
+<p>这里我们使用同一个 ca-cert：</p>
+<div class="highlight"><pre><span></span><code>keytool -import -keystore server.truststore.jks -alias CARoot -file ca-cert
+</code></pre></div>
+<p>也可以按第一步重新创建新的 ca 用于签发 client 端证书。</p>
+<h2 id="3">3. 生成服务端证书</h2>
+<h3 id="31-ssl-key">3.1 创建服务端 SSL key</h3>
 <p>为每个 Kafka broker 生成 keystore 文件，存储 privae key, public key 以及 certificate</p>
 <div class="highlight"><pre><span></span><code>keytool \
     -genkey \
@@ -881,43 +974,29 @@
 </ul>
 </blockquote>
 <p>验证证书的内容：</p>
-<div class="highlight"><pre><span></span><code>keytool -list -v -keystore server.keystore.jks
+<div class="highlight"><pre><span></span><code>keytool -list -v -keystore server.truststore.jks [-storepass &lt;storepass&gt;]
+
+keytool -list -rfc -keystore server.truststore.jks [-storepass &lt;storepass&gt;]
 </code></pre></div>
-<h3 id="_1">主机名验证</h3>
-<p>host name verification 是指从证书获取 server 提供的信息与正在连接的 server 端的 hostname 或者 ip 比较，以确保连接到真实的 server。</p>
-<p>这个检查的主要目的是防止中间人攻击。很长时间以来，这个检查默认是关闭的，从 Kafka 2.0.0 之后，host name verification 默认开启。</p>
-<p>可以通过将 <code>ssl.endpoint.identification.algorithm</code> 设置为空字符串关闭这个检查。</p>
-<div class="highlight"><pre><span></span><code>bin/kafka-configs.sh --bootstrap-server localhost:9093 --entity-type brokers --entity-name 0 --alter --add-config &quot;listener.name.internal.ssl.endpoint.identification.algorithm=&quot;
-</code></pre></div>
-<p>如果 host name verification 开启，clients 会确认 Server 的 fully qualified domain name(FQDN) 或者 ip address，即下面 2 个 fields:</p>
+<h4 id="311-host-name-verification">3.1.1 主机名验证(host name verification)</h4>
+<p>通过 SSL 协议连接验证证书时，会验证证书中的域名与实际连接的域名是否一致，以确保连接到真实的 server/client（这里的域名也可以是 hostname 或者 IP）。</p>
+<p>证书包含的域名信息信息指创建创建证书时指定的 fully qualified domain name(FQDN) 或者 ip address，即下面 2 个 fields:</p>
 <ol>
 <li>Common Name(CN)</li>
 <li>Subject Alternative Name (SAN)</li>
 </ol>
-<p>尽管 Kafak 检查这 2 个 fields，使用 Common Name 用于 host name verification 从 2000 之后是不推荐的。用 SAN field 更加灵活，允许使用 multiple DNS 和 IP entries 声明在 certificate 中</p>
-<h2 id="2-ca-certificate-authority">2. 创建你自己的 CA (certificate authority)</h2>
-<div class="highlight"><pre><span></span><code>openssl req -new -x509 -keyout ca-key -out ca-cert -days 36500
+<p>使用 Common Name 用于主机名验证从 2000 之后不再推荐，用 SAN field 更加灵活，允许使用 multiple DNS 和 IP entries 在证书中声明。</p>
+<p>这个检查的主要目的是防止中间人攻击。很长时间以来，这个检查默认是关闭的，从 Kafka 2.0.0 之后，主机名验证默认开启。</p>
+<p>服务端和客户端都可以通过将 <code>ssl.endpoint.identification.algorithm</code> 设置为空字符串关闭这个检查</p>
+<p>或者针对特定的 listener 进行设置</p>
+<div class="highlight"><pre><span></span><code>kafka-configs.sh --bootstrap-server localhost:9093 --entity-type brokers --entity-name 0 --alter --add-config &quot;listener.name.internal.ssl.endpoint.identification.algorithm=&quot;
 </code></pre></div>
-<ul>
-<li>ca-key: private and public key</li>
-<li>ca-cert: ca 自身的证书，自签名</li>
-</ul>
-<p>将 ca 自身的证书 ca-cert 添加到 client.truststore.jks 中，客户端持有 client.truststore.jks 后可信任此 ca</p>
-<div class="highlight"><pre><span></span><code>keytool -import -keystore client.truststore.jks -alias CARoot -file ca-cert
-</code></pre></div>
-<p>验证 truststore 内容：</p>
-<div class="highlight"><pre><span></span><code>keytool -list -v -keystore client.truststore.jks
-</code></pre></div>
-<h3 id="kafka-broker-require-client-authentication">kafka broker require client authentication</h3>
-<p>如果需要让 server 验证 client 的证书，即在 broker 端设置 <code>ssl.client.auth=requested</code> 或者 <code>ssl.client.auth=required</code> 时，必须提供包含签发 client 端 certificate 的 CA 的 truststore 文件</p>
-<div class="highlight"><pre><span></span><code>keytool -import -keystore server.truststore.jks -alias CARoot -file ca-cert
-</code></pre></div>
-<h2 id="3">3. 签名证书</h2>
-<p>用 <em>步骤2</em> 生成的 ca 签名 <em>步骤1</em> 生成的证书</p>
+<h3 id="32">3.2 签名证书</h3>
+<p>使用 ca 签名服务证书</p>
 <p>首先，从 keystore 文件中导出证书 server-cert，创建证书请求：</p>
 <div class="highlight"><pre><span></span><code>keytool \
     -certreq \
-    -storepass password \
+    -storepass password \   # 使用生成server.keystore.jks 的密码
     -keystore server.keystore.jks \
     -alias localhost \
     -file server-cert
@@ -930,13 +1009,13 @@
     -out server-cert-signed \
     -days 36500 \
     -CAcreateserial \
-    -passin pass:password
+    -passin pass:password  # 使用 ca 证书的密码
 </code></pre></div>
 <p>最后，需要将 ca 和 server 的证书导入 server.keystore.jks 文件</p>
 <div class="highlight"><pre><span></span><code>keytool \
     -import \
     -noprompt \
-    -storepass password \
+    -storepass password \  # 使用生成 server.keystore.jks 的密码
     -keystore server.keystore.jks \
     -alias CARoot \
     -file ca-cert
@@ -944,7 +1023,7 @@
 keytool \
     -import \
     -noprompt \
-    -storepass password \
+    -storepass password \  # 使用生成 server.keystore.jks 的密码
     -keystore server.keystore.jks \
     -alias localhost \
     -file server-cert-signed
@@ -953,7 +1032,52 @@ keytool \
 <li>-noprompt: 不在提示是否信任证书，不需要输入 yes/no(相当于直接输入 yes 表示信任证书)</li>
 <li>-storepass: keystore 文件的密码</li>
 </ul>
-<p>如果 server 需要验证 client 证书，则同样要给 client 签发证书，步骤与 server 端相同</p>
+<h2 id="4">4.（可选）生成客户端证书</h2>
+<p>如果 server 需要验证 client 证书，则要给 client 签发证书，步骤与 server 端相同</p>
+<p>创建客户端 SSL key 文件 client.keystore.jks</p>
+<div class="highlight"><pre><span></span><code>keytool \
+    -genkey \
+    -alias localhost \
+    -keyalg RSA \
+    -keysize 2048 \
+    -keypass password \
+    -storepass password \
+    -keystore client.keystore.jks \
+    -validity 36500 \
+    -dname &quot;CN=www.amanp.com, OU=amanp, O=amanp, L=BJ, ST=BJ, C=CN&quot; \
+    -ext SAN=DNS:localhost \
+</code></pre></div>
+<p>签名证书</p>
+<div class="highlight"><pre><span></span><code>keytool \
+    -certreq \
+    -storepass password \
+    -keystore client.keystore.jks \
+    -alias localhost \
+    -file client-cert
+
+openssl x509 -req \
+    -CA ca-cert \
+    -CAkey ca-key \
+    -in client-cert \
+    -out client-cert-signed \
+    -days 36500 \
+    -CAcreateserial \
+    -passin pass:password
+</code></pre></div>
+<p>将 ca 和 server 的证书导入 client.keystore.jks 文件</p>
+<div class="highlight"><pre><span></span><code>keytool \
+    -import \
+    -storepass password \
+    -keystore client.keystore.jks \
+    -alias CARoot \
+    -file ca-cert
+
+keytool \
+    -import -storepass password \
+    -keystore client.keystore.jks \
+    -alias localhost \
+    -file client-cert-signed
+</code></pre></div>
                 
               
               

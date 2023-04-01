@@ -888,14 +888,18 @@
 <p>client 与 broker 建立 SSL 连接，传输加密的数据：</p>
 <ul>
 <li>每个 broker 需提供证书(keystore 文件)</li>
-<li>client 需要一个 truststore 文件，该 truststore 文件包含可信 ca 证书，这里的 ca 就是签发 broker 证书的 ca</li>
+<li>client 需要一个 truststore 文件，该 truststore 文件包含可信 ca 的证书，这里的 ca 就是签发 broker 证书的 ca</li>
 </ul>
 <p>另外，如果 broker 想要通过 SSL 认证 client，则除上述要求，还需：</p>
 <ul>
-<li>broker 需要一个 truststore 文件，该 truststore 文件包含可信 ca 证书，这里的 ca 就是签发 client 证书的 ca</li>
+<li>broker 需要一个 truststore 文件，该 truststore 文件包含可信 ca 的证书，这里的 ca 就是签发 client 证书的 ca</li>
 <li>client 需要提供证书(keystore 文件)</li>
 </ul>
-<p>这里的认证是指：client 持有证书是 broker 信任的 ca 签发的</p>
+<p>这里的认证有 2 层含义：</p>
+<ol>
+<li>单向认证：kafka broker 提供证书，kafka client 需要验证 broker 提供的证书。验证内容包括：证书是否过期、是否可信（由信任的 ca 签发）、证书中域名是否与请求域名一致。</li>
+<li>双向认证：kafka broker 和 client 都需要提供证书，既需要 client 验证 broker 证书，也需要 broker 验证 client 证书。</li>
+</ol>
 <p>如果需要对 client 连接设置 acl 规则，则需要从证书中提取用户信息，一般用证书的 CN 或者 SAN 信息</p>
 <table>
 <thead>

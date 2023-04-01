@@ -828,11 +828,18 @@
                 <h1 id="22-broker">2.2 broker 配置</h1>
 <h2 id="serverproperties">server.properties</h2>
 <p>监听地址，当对 client 暴露的地址与本地监听地址不一致时，使用 <code>advertised.listeners</code>：</p>
-<div class="highlight"><pre><span></span><code><span class="na">listeners</span><span class="o">=</span><span class="s">PLAINTEXT://:9092,SSL://:9093</span>
-<span class="na">advertised.listeners</span><span class="o">=</span><span class="s">PLAINTEXT://192.168.16.5:9092,SSL://180.76.140.179:9093</span>
+<div class="highlight"><pre><span></span><code><span class="c"># listeners=PLAINTEXT://:9092,SSL://:9093</span>
+<span class="na">listeners</span><span class="o">=</span><span class="s">BROKER://:9092,CLIENT://:9093</span>
+
+<span class="c"># advertised.listeners=PLAINTEXT://192.168.16.5:9092,SSL://180.76.140.179:9093</span>
+<span class="na">advertised.listeners</span><span class="o">=</span><span class="s">BROKER://192.168.0.192:9092,CLIENT://192.168.0.192:9093</span>
+
+<span class="na">listener.security.protocol.map</span><span class="o">=</span><span class="s">BROKER:PLAINTEXT,CLIENT:SSL</span>
 </code></pre></div>
 <p>broker 内部连接使用的协议：</p>
-<div class="highlight"><pre><span></span><code><span class="na">security.inter.broker.protocol</span><span class="o">=</span><span class="s">PLAINTEXT</span>
+<div class="highlight"><pre><span></span><code><span class="c"># security.inter.broker.protocol=PLAINTEXT</span>
+
+<span class="na">inter.broker.listener.name</span><span class="o">=</span><span class="s">BROKER</span>
 </code></pre></div>
 <p>keystore 与 truststore 的位置与密码：</p>
 <div class="highlight"><pre><span></span><code><span class="c"># 只有需要验证客户端证书时需要设置</span>
@@ -901,6 +908,9 @@ issuer=C = cn, ST = beijing, L = beijing, O = amanp, OU = amanp, CN = mapan, ema
 ---
 </code></pre></div>
 <p>如果获取不到证书信息，则 SSL 访问不正常</p>
+<p>提取 <code>client.truststore.jks</code> 中包含的 cafile，验证服务端连接与证书</p>
+<div class="highlight"><pre><span></span><code>openssl s_client -verify 100 -showcerts -connect 106.12.163.91:9095 -CAfile &lt;(keytool -list -rfc -keystore client.truststore.jks -storepass storepass)
+</code></pre></div>
                 
               
               

@@ -587,7 +587,14 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    命令行工具
+    详细参数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    示例
   </a>
   
 </li>
@@ -735,7 +742,14 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    命令行工具
+    详细参数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    示例
   </a>
   
 </li>
@@ -758,8 +772,8 @@
                 
                 
                 <h1 id="44">4.4 命令行工具</h1>
-<h2 id="_1">命令行工具</h2>
 <p><code>kafka-acls.sh</code></p>
+<h2 id="_1">详细参数</h2>
 <ul>
 <li>Action:<ul>
 <li><code>--add</code>: 增加 acl 规则</li>
@@ -830,7 +844,7 @@
 </ul>
 </li>
 </ul>
-<p>示例：</p>
+<h2 id="_2">示例</h2>
 <ol>
 <li>
 <p>允许 User:Bob 或者 User:Alice 从 IP 198.51.100.0 或者 198.51.100.1 读写 Test-topic</p>
@@ -962,10 +976,68 @@ bin/kafka-acls.sh \
 --cluster
 
 Adding ACLs for resource `ResourcePattern(resourceType=CLUSTER, name=kafka-cluster, patternType=LITERAL)`:
-    (principal=User:Bob, host=*, operation=IDEMPOTENT_WRITE, permissionType=ALLOW)
+     (principal=User:Bob, host=*, operation=IDEMPOTENT_WRITE, permissionType=ALLOW)
 
 Current ACLs for resource `ResourcePattern(resourceType=CLUSTER, name=kafka-cluster, patternType=LITERAL)`:
-    (principal=User:Bob, host=*, operation=IDEMPOTENT_WRITE, permissionType=ALLOW)
+     (principal=User:Bob, host=*, operation=IDEMPOTENT_WRITE, permissionType=ALLOW)
+</code></pre></div>
+<p>上述命令也替换成使用 <code>--bootstrap-server</code> 的方式：</p>
+<div class="highlight"><pre><span></span><code>kafka-acls.sh \
+--bootstrap-server ${BOOTSTRAP_SERVER} \
+--add \
+--allow-principal User:* \
+--operation IdempotentWrite \
+--cluster
+
+kafka-acls.sh \
+    --bootstrap-server ${BOOTSTRAP_SERVER} \
+    --add \
+    --allow-principal User:alice \
+    --operation IdempotentWrite \
+    --cluster  --command-config /usr/local/ams-worker/conf/kafka.properties
+</code></pre></div>
+</li>
+<li>
+<p>给用户 alice 增加事务Id <code>transaction_id</code> 的写权限：</p>
+<div class="highlight"><pre><span></span><code>kafka-acls.sh \
+    --bootstrap-server ${BOOTSTRAP_SERVER} \
+    --add \
+    --resource-pattern-type LITERAL \
+    --transactional-id transaction_id \
+    --allow-principal User:alice \
+    --operation Write
+
+`--resource-pattern-type LITERAL --transactional-id=*` 表示所有事务Id
+
+kafka-acls.sh \
+    --bootstrap-server ${BOOTSTRAP_SERVER} \
+    --add \
+    --resource-pattern-type LITERAL \
+    --transactional-id=* \
+    --allow-principal User:alice \
+    --operation Write
+</code></pre></div>
+</li>
+<li>
+<p>给用户 alice 增加事务Id <code>transaction_id</code> 的描述权限：</p>
+<div class="highlight"><pre><span></span><code>kafka-acls.sh \
+    --bootstrap-server ${BOOTSTRAP_SERVER} \
+    --add \
+    --resource-pattern-type LITERAL \
+    --transactional-id transaction_id \
+    --allow-principal User:alice \
+    --operation Describe
+</code></pre></div>
+</li>
+<li>
+<p>删除用户 alice 对事务Id <code>transaction_id</code> 的描述权限：</p>
+<div class="highlight"><pre><span></span><code>kafka-acls.sh \
+    --bootstrap-server ${BOOTSTRAP_SERVER} \
+    --remove \
+    --resource-pattern-type LITERAL \
+    --transactional-id transaction_id \
+    --allow-principal User:alice \
+    --operation Describe
 </code></pre></div>
 </li>
 </ol>

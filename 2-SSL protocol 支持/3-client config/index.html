@@ -793,7 +793,11 @@
 <span class="na">ssl.protocol</span> <span class="o">=</span> <span class="s">TLSv1.2</span>
 </code></pre></div>
 <h2 id="_1">使用</h2>
-<div class="highlight"><pre><span></span><code>bin/kafka-console-consumer.sh --bootstrap-server 180.76.140.179:9093 --topic __test  --from-beginning --consumer.config client_security.properties
+<p>生产</p>
+<div class="highlight"><pre><span></span><code>bin/kafka-console-producer.sh --bootstrap-server 180.76.140.179:9093 --topic __test --producer.config client_security.properties
+</code></pre></div>
+<p>消费</p>
+<div class="highlight"><pre><span></span><code>bin/kafka-console-consumer.sh --bootstrap-server 180.76.140.179:9093 --topic __test --from-beginning --consumer.config client_security.properties
 </code></pre></div>
                 
               

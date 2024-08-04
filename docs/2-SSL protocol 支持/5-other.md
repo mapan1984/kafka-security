@@ -1,4 +1,4 @@
-## JDK 11 keytool genkey 无法指定 keypass
+## 创建证书告警
 
     keytool \
         -genkey \
@@ -12,14 +12,18 @@
         -dname "CN=www.amanp.com, OU=amanp, O=amanp, L=BJ, ST=BJ, C=CN" \
         -ext SAN=DNS:localhost
 
-JDK 11 创建 SSL key 告警：
+### keypass 与 storepass 不同
 
 > Warning:  Different store and key passwords not supported for PKCS12 KeyStores. Ignoring user-specified -keypass value.
 
 解决方式：将 `keypass` 与 `storepass` 设置为相同值
 
-- https://developer.android.com/studio/releases#ki-key-keystore-warning
 - https://bugs.openjdk.java.net/browse/JDK-8008292
+
+### migrate to PKCS12
+
+> Warning:
+> The JKS keystore uses a proprietary format. It is recommended to migrate to PKCS12 which is an industry standard format using "keytool -importkeystore -srckeystore client.keystore.jks -destkeystore client.keystore.jks -deststoretype pkcs12".
 
 ## 数字证书格式
 
@@ -45,17 +49,15 @@ JDK 11 创建 SSL key 告警：
 
     openssl pkcs12 -in client.truststore.pfx -nodes -out client.truststore.pem
 
->     openssl pkcs12 -in client.truststore.pfx -nokeys -out client.truststore.pem
+>   openssl pkcs12 -in client.truststore.pfx -nokeys -out client.truststore.pem
 >
->     openssl pkcs12 -in client.truststore.pfx -nocerts -out client.truststore.key -nodes
+>   openssl pkcs12 -in client.truststore.pfx -nocerts -out client.truststore.key -nodes
 >
 > * -nodes：一直对私钥不加密。
-> * -nocerts：不输出任何证书。
 > * -nokeys：不输出任何私钥信息值。
+> * -nocerts：不输出任何证书。
 
 将 pem 证书文件转换为 key 格式密钥文件（server.key）与 crt 格式公钥文件（server.crt）
 
     openssl rsa -in client.truststore.pem -out client.truststore.key
     openssl x509 -in client.truststore.pem -out client.truststore.crt
-
-- https://help.aliyun.com/document_detail/42214.html

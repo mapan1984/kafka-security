@@ -12,9 +12,9 @@
 
 增加用户：
 
-    kafka-configs.sh --zookeeper ${ZK_CONNECT} --alter --add-config 'SCRAM-SHA-256=[iterations=8192,password=alice_pass],SCRAM-SHA-512=[password=alice_pass]' --entity-type users --entity-name alice
+    kafka-configs.sh --zookeeper ${ZK_CONNECT} --alter --add-config 'SCRAM-SHA-256=[password=*****],SCRAM-SHA-512=[password=*****]' --entity-type users --entity-name alice
 
-    kafka-configs.sh --zookeeper ${ZK_CONNECT} --alter --add-config 'SCRAM-SHA-256=[password=admin_pass],SCRAM-SHA-512=[password=admin_pass]' --entity-type users --entity-name admin
+    kafka-configs.sh --bootstrap-server ${BOOTSTRAP_SERVER} --alter --add-config 'SCRAM-SHA-256=[password=*****],SCRAM-SHA-512=[password=*****]' --entity-type users --entity-name alice
 
 描述用户：
 

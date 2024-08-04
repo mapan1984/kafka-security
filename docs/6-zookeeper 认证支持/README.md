@@ -44,6 +44,10 @@ Client {
 export CLIENT_JVMFLAGS="-Djava.security.auth.login.config=/usr/local/zookeeper/conf/zookeeper_client_jaas.conf"
 ```
 
+通过 `zkCli.sh` 访问：
+
+    ./bin/zkCli.sh -server <zk_host>:2181
+
 ## kafka 访问
 
 增加 jaas 文件，如 `kafka_server_jaas.conf`，添加以下内容：
@@ -56,9 +60,19 @@ Client {
 };
 ```
 
-运行 kafka 时需要将 jaas 文件露肩加入到 JVM 参数中
+运行 kafka 时需要将 jaas 文件加入到 JVM 参数中
 
-在创建 znode 时开启 ACL
+```
+# bin/kafka-server-start.sh
+# bin/zookeeper-shell.sh
+export KAFKA_OPTS='-Djava.security.auth.login.config=/usr/local/kafka/config/kafka_server_jaas.conf'
+```
+
+通过 `zookeeper-shell.sh` 访问 zk 服务：
+
+    ./bin/zookeeper-shell.sh <zk_host>:2181
+
+kafka 服务在创建 znode 时开启 ACL
 
 ``` jproperties
 zookeeper.set.acl=true
@@ -77,3 +91,13 @@ zookeeper.set.acl=true
     : cdrwa
     'world,'anyone
     : r
+
+格式为 `'<认证方式> '<用户名>: <权限列表>`
+
+权限分为 5 种：
+
+* c: create
+* d: delete
+* r: read
+* w: write
+* a: admin

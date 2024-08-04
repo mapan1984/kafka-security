@@ -24,10 +24,10 @@
 
 `javax.security.auth.login.AppConfigurationEntry.LoginModuleControlFlag`
 
-- required: 对应的 `LoginModule` 对象必须被调用，且通过验证
-- requisite
-- sufficient
-- optional
+- Required：要求对应的 LoginModule 成功，无论成功与否，都会继续判断后面的 LoginModule。
+- Requisite：要求对应的 LoginModule 成功，如果成功，会继续判断后面的 LoginModule。
+- Sufficient：如果对应 LoginModule 成功，则认证流程成功并返回，否则继续判断后面的 LoginModule。
+- Optional：不要求对应的 LoginModule 成功，无论成功与否，都会继续判断后面的 LoginModule。
 
 ## LoginModule Options
 

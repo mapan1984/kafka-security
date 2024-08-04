@@ -2,10 +2,28 @@
 
 ## 1. 创建 CA (certificate authority)
 
-    openssl req -new -x509 -keyout ca-key -out ca-cert -days 36500
+    openssl req -new \
+        -x509 \
+        -keyout ca-key \
+        -out ca-cert \
+        -days 36500
 
-* ca-key: private and public key
+创建过程中，会要求输入 `PEM pass phrass` 和 CN 等身份信息，完成后生成以下文件：
+
+* ca-key: ca 私钥
 * ca-cert: ca 自身的证书，自签名
+
+> 可以通过参数 `-passout pass:****` 指定 `PEM pass phrass`，通过参数 `-subj` 指定身份信息
+>
+>     openssl req -new \
+>         -x509 \
+>         -newkey rsa:2048 \
+>         -sha256 \
+>         -keyout ca-key \
+>         -out ca-cert \
+>         -days 36500 \
+>         -passout pass:***** \
+>         -subj "/C=CN/ST=Beijing/L=Beijing/O=Mapan/OU=Mapan/CN=Mapan"
 
 ## 2. 生成 truststore 文件
 
@@ -13,7 +31,21 @@
 
 将 ca 自身的证书 ca-cert 添加到 client.truststore.jks 中，客户端持有 client.truststore.jks 后可信任此 ca
 
-    keytool -import -keystore client.truststore.jks -alias CARoot -file ca-cert
+    keytool \
+        -import \
+        -keystore client.truststore.jks \
+        -alias CARoot \
+        -file ca-cert
+
+> 可以通过参数 `-storepass` 指定 storepass, 通过参数 `-noprompt` 默认信任添加的 ca 文件，不等待输入确认
+>
+>     keytool \
+>         -import \
+>         -keystore client.truststore.jks \
+>         -alias CARoot \
+>         -file ca-cert \
+>         -storepass ***** \
+>         -noprompt
 
 验证 truststore 内容：
 
@@ -21,19 +53,25 @@
 
     keytool -list -rfc -keystore client.truststore.jks [-storepass <storepass>]
 
+    keytool -list -v -keystore client.truststore.jks -storetype pkcs12
+
 ### 2.2（可选）server.truststore.jks
 
 如果需要双向认证，即让 kafka broker 验证 client 的证书，在 broker 端设置 `ssl.client.auth=required`。
 
-同时 broker 端也需要 truststore 文件，包含签发 client 端证书的 ca 证书。
+这时 broker 端也需要 truststore 文件，包含签发 client 端证书的 ca 证书。
 
 这里我们使用同一个 ca-cert：
 
-    keytool -import -keystore server.truststore.jks -alias CARoot -file ca-cert
+    keytool \
+        -import \
+        -keystore server.truststore.jks \
+        -alias CARoot \
+        -file ca-cert
 
 也可以按第一步重新创建新的 ca 用于签发 client 端证书。
 
-## 3. 生成服务端证书
+## 3. 生成服务端证书 server.keystore.jks
 
 ### 3.1 创建服务端 SSL key
 
@@ -91,7 +129,7 @@
 1. Common Name(CN)
 2. Subject Alternative Name (SAN)
 
-使用 Common Name 用于主机名验证从 2000 之后不再推荐，用 SAN field 更加灵活，允许使用 multiple DNS 和 IP entries 在证书中声明。
+使用 Common Name 用于主机名验证从 2000 年之后不再推荐，用 SAN field 更加灵活，允许使用 multiple DNS 和 IP entries 在证书中声明。
 
 这个检查的主要目的是防止中间人攻击。很长时间以来，这个检查默认是关闭的，从 Kafka 2.0.0 之后，主机名验证默认开启。
 
@@ -146,7 +184,7 @@
 * -noprompt: 不在提示是否信任证书，不需要输入 yes/no(相当于直接输入 yes 表示信任证书)
 * -storepass: keystore 文件的密码
 
-## 4.（可选）生成客户端证书
+## 4.（可选）生成客户端证书 client.keystore.jks
 
 如果 server 需要验证 client 证书，则要给 client 签发证书，步骤与 server 端相同
 
@@ -196,3 +234,98 @@
         -keystore client.keystore.jks \
         -alias localhost \
         -file client-cert-signed
+
+## 5.（可选）转换客户端证书格式
+
+kafka java 客户端使用 keytool 工具生成的 jks 格式文件：
+
+* `client.truststore.jks`：让客户端信任服务端证书的 CA
+* `client.keystore.jks`：包含客户端自身的证书与 key
+
+kafka 其他语言客户端，例如 python, go 的语言，一般需要基于 openssl 工具库生成的 pem, key 等格式的文件，以 python kafka 为例：
+
+* `ssl_cafile: ca.pem`：对应 `client.truststore.jks`，让客户端信任服务端证书的 CA
+* `ssl_certfile: client.pem`: 对应 `client.keystore.jks`，客户端自身的证书
+* `ssl_keyfile: client.key`: 对应 `client.keystore.jks`，客户端自身的key
+
+### ssl_cafile
+
+让客户端信任服务端的 CA，所以从 `client.truststore.jks` 中导出
+
+    keytool -importkeystore \
+        -srckeystore client.truststore.jks \
+        -destkeystore  client.truststore.pfx \
+        -srcstoretype JKS \
+        -deststoretype PKCS12 \
+        -srcstorepass ***** \
+        -deststorepass *****
+
+    openssl pkcs12 \
+        -in client.truststore.pfx \
+        -nodes \
+        -nokeys \
+        -out client.truststore.pem \
+        -passin pass:*****
+
+    cp client.truststore.pem ca.pem
+
+### ssl_certfile
+
+客户端自身的证书
+
+    keytool \
+        -exportcert \
+        -alias localhost \
+        -keystore client.keystore.jks \
+        -rfc \
+        -file client.keystore.pem
+
+    cp client.keystore.pem client.pem
+
+如果不知道 alias 是什么，可以通过以下命令查看
+
+    keytool -list -v -keystore client.keystore.jks
+
+---
+
+    keytool -importkeystore \
+        -srckeystore client.keystore.jks \
+        -destkeystore  client.keystore.pfx \
+        -srcstoretype JKS \
+        -deststoretype PKCS12 \
+        -srcstorepass ***** \
+        -deststorepass *****
+
+    openssl pkcs12 \
+        -in client.keystore.pfx \
+        -nodes \
+        -nokeys \
+        -out client.keystore.pem \
+        -passin pass:*****
+
+    cp client.keystore.pem client.pem
+
+### ssl_keyfile
+
+客户端自身的key
+
+    keytool \
+        -importkeystore \
+        -srckeystore client.keystore.jks \
+        -destkeystore client.keystore.pfx \
+        -deststoretype PKCS12 \
+        -srcstorepass ***** \
+        -deststorepass *****
+
+    openssl pkcs12 \
+        -in client.keystore.pfx \
+        -nodes \
+        -nocerts \
+        -out client.keystore.pem \
+        -passin pass:*****
+
+    cp client.keystore.pem client.key
+
+- `nokeys`: 不输出私钥信息
+- `nocerts`: 不输出证书
+- `nodes`: 不对私钥加密

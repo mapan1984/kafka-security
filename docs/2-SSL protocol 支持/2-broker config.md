@@ -27,13 +27,13 @@ keystore 与 truststore 的位置与密码：
 ``` jproperties
 # 只有需要验证客户端证书时需要设置
 # ssl.truststore.location=/home/kafka/kafka.server.truststore.jks
-# ssl.truststore.password=pass1984
+# ssl.truststore.password=*****
 
 ssl.keystore.location=/home/kafka/kafka.server.keystore.jks
-ssl.keystore.password=pass1984
+ssl.keystore.password=*****
 
 # 只有需要双向认证的时候需要设置
-# ssl.key.password=pass1984
+# ssl.key.password=*****
 ```
 
 ### 其他相关配置

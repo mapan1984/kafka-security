@@ -31,6 +31,17 @@ ext_client.KafkaServer {
 };
 ```
 
+给不同 listener 开放不同的 SASL 机制
+
+``` jproperties
+# some.prop
+# listener.name.{listenerName}.some.prop
+# listener.name.{listenerName}.{mechanism}.some.prop
+
+listener.name.sasl_client.sasl.enabled.mechanisms=PLAIN,SCRAM-SHA-512
+listener.name.ext_client.sasl.enabled.mechanisms=SCRAM-SHA-512
+```
+
 client 通过 SASL_CLIENT 访问 broker 时，可以使用 3 种机制
 
 ``` jproperties

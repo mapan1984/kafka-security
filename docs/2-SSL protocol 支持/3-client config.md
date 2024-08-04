@@ -8,12 +8,12 @@ bootstrap.servers=180.76.140.179:9093
 security.protocol=SSL
 
 ssl.truststore.location=/root/client.truststore.jks
-ssl.truststore.password=pass1984
+ssl.truststore.password=*****
 
 # 如果 client 端也提供证书
 # ssl.keystore.location=/root/client.keystore.jks
-# ssl.keystore.password=pass1984
-# ssl.key.password=pass1984
+# ssl.keystore.password=*****
+# ssl.key.password=******
 
 # server 地址与证书中的 CN 或者 SAN 中包含的信息一致
 # 默认 https 表示需要验证，为空关闭验证

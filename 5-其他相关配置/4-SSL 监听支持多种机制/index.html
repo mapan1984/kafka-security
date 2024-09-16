@@ -12,13 +12,9 @@
         <meta name="author" content="mapan">
       
       
-        <link rel="canonical" href="https://mapan1984.github.io/kafka-security/5-%E5%85%B6%E4%BB%96%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/2-JAAS-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+        <link rel="canonical" href="https://mapan1984.github.io/kafka-security/5-%E5%85%B6%E4%BB%96%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/4-SSL%20%E7%9B%91%E5%90%AC%E6%94%AF%E6%8C%81%E5%A4%9A%E7%A7%8D%E6%9C%BA%E5%88%B6/">
       
       
-        <link rel="prev" href="../1-%E7%9B%91%E5%90%AC%E5%9C%B0%E5%9D%80/">
-      
-      
-        <link rel="next" href="../3-SASL%20%E7%9B%91%E5%90%AC%E6%94%AF%E6%8C%81%E5%A4%9A%E7%A7%8D%E6%9C%BA%E5%88%B6/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -26,7 +22,7 @@
     
     
       
-        <title>5.2 JAAS 配置文件规则 - kafka 认证，鉴权，加密</title>
+        <title>4 SSL 监听支持多种机制 - kafka 认证，鉴权，加密</title>
       
     
     
@@ -77,11 +73,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#52-jaas-login-configuration-file" class="md-skip">
-          跳转至
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -114,7 +105,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              5.2 JAAS 配置文件规则
+              4 SSL 监听支持多种机制
             
           </span>
         </div>
@@ -708,21 +699,21 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
         
           
           
@@ -744,7 +735,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             5. 其他相关配置
@@ -776,30 +767,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    5.2 JAAS 配置文件规则
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../2-JAAS-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -808,62 +779,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#loginmodule" class="md-nav__link">
-    <span class="md-ellipsis">
-      LoginModule
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#flag" class="md-nav__link">
-    <span class="md-ellipsis">
-      Flag
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#loginmodule-options" class="md-nav__link">
-    <span class="md-ellipsis">
-      LoginModule Options
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      参考
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -934,52 +849,6 @@
   
   
   
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#loginmodule" class="md-nav__link">
-    <span class="md-ellipsis">
-      LoginModule
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#flag" class="md-nav__link">
-    <span class="md-ellipsis">
-      Flag
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#loginmodule-options" class="md-nav__link">
-    <span class="md-ellipsis">
-      LoginModule Options
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      参考
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -997,37 +866,9 @@
   
 
 
-<h1 id="52-jaas-login-configuration-file">5.2 JAAS Login Configuration File</h1>
-<div class="highlight"><pre><span></span><code>&lt;entry name&gt; { 
-    &lt;LoginModule&gt; &lt;flag&gt; &lt;LoginModule options&gt;;
-    &lt;LoginModule&gt; &lt;flag&gt; &lt;LoginModule options&gt;;
-    . . .
-};
+  <h1>4 SSL 监听支持多种机制</h1>
 
-&lt;entry name&gt; { 
-    &lt;LoginModule&gt; &lt;flag&gt; &lt;LoginModule options&gt;;
-    &lt;LoginModule&gt; &lt;flag&gt; &lt;LoginModule options&gt;;
-    . . .
-};
-</code></pre></div>
-<h2 id="loginmodule">LoginModule</h2>
-<p><code>LoginModule</code> 需要实现 <code>javax.security.auth.spi.LoginModule</code> 接口，决定了该 entry 通过何种方式认证。</p>
-<p>一个 entry 中可以配置多个 <code>LoginModule</code>，认证流程会按照顺序依次执行 <code>LoginModule</code></p>
-<h2 id="flag">Flag</h2>
-<p><code>javax.security.auth.login.AppConfigurationEntry.LoginModuleControlFlag</code></p>
-<ul>
-<li>Required：要求对应的 LoginModule 成功，无论成功与否，都会继续判断后面的 LoginModule。</li>
-<li>Requisite：要求对应的 LoginModule 成功，如果成功，会继续判断后面的 LoginModule。</li>
-<li>Sufficient：如果对应 LoginModule 成功，则认证流程成功并返回，否则继续判断后面的 LoginModule。</li>
-<li>Optional：不要求对应的 LoginModule 成功，无论成功与否，都会继续判断后面的 LoginModule。</li>
-</ul>
-<h2 id="loginmodule-options">LoginModule Options</h2>
-<p>可以包含多个 <code>key=value</code> 形式的额外配置</p>
-<h2 id="_1">参考</h2>
-<ul>
-<li>https://www.jianshu.com/p/4585ce68b2ab</li>
-<li>https://docs.oracle.com/javase/7/docs/api/javax/security/auth/login/Configuration.html</li>
-</ul>
+
 
 
 

@@ -94,6 +94,13 @@ zookeeper.set.acl=true
 
 格式为 `'<认证方式> '<用户名>: <权限列表>`
 
+### 认证方式
+
+* IP
+* world:anyone
+
+### 权限
+
 权限分为 5 种：
 
 * c: create

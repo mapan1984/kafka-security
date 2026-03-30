@@ -38,7 +38,7 @@ ssl.keystore.password=*****
 
 ### 其他相关配置
 
-SSL 版本：
+SSL 版本（建议使用默认配置）：
 
 ``` jproperties
 ssl.enabled.protocols = TLSv1.2,TLSv1.1,TLSv1

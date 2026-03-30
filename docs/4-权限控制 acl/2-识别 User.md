@@ -1,8 +1,8 @@
-# 4.2 确定 Principal
+# 4.2 识别 User (Principal)
 
-## Principal (User) 怎么确定
+## 从请求中识别 User (Principal)
 
-### SSL
+### SSL 协议
 
 对于 SSL，user name 来自 client 证书的 `CN=writeuser,OU=Unknown,O=Unknown,L=Unknown,ST=Unknown,C=Unknown` 信息(the X.500 certificate distinguished name)。
 
@@ -34,7 +34,7 @@ DEFAULT
 
 会提取出 `adminuser@admin` 作为用户名(Principal)
 
-### SASL
+### SASL 协议
 
 Principal 即为注册的用户名
 

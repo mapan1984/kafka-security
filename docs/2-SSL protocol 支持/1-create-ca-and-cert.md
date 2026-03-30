@@ -184,6 +184,8 @@
 * -noprompt: 不在提示是否信任证书，不需要输入 yes/no(相当于直接输入 yes 表示信任证书)
 * -storepass: keystore 文件的密码
 
+> keystore 文件中包含私钥以及相应证书链
+
 ## 4.（可选）生成客户端证书 client.keystore.jks
 
 如果 server 需要验证 client 证书，则要给 client 签发证书，步骤与 server 端相同

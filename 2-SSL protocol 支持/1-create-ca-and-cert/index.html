@@ -822,11 +822,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../4-%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%20acl/2-%E7%A1%AE%E5%AE%9A%20Principal/" class="md-nav__link">
+      <a href="../../4-%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%20acl/2-%E8%AF%86%E5%88%AB%20User/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    4.2 确定 Principal
+    4.2 识别 User
   </span>
   
 
@@ -869,6 +869,27 @@
   
   <span class="md-ellipsis">
     4.4 命令行工具
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4-%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%20acl/5-%E5%B8%B8%E8%A7%81%E5%9C%BA%E6%99%AF%E6%89%80%E9%9C%80%E6%9D%83%E9%99%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.5 常见场景所需权限
   </span>
   
 
@@ -1373,6 +1394,9 @@ keytool \
 <li>-noprompt: 不在提示是否信任证书，不需要输入 yes/no(相当于直接输入 yes 表示信任证书)</li>
 <li>-storepass: keystore 文件的密码</li>
 </ul>
+<blockquote>
+<p>keystore 文件中包含私钥以及相应证书链</p>
+</blockquote>
 <h2 id="4-clientkeystorejks">4.（可选）生成客户端证书 client.keystore.jks</h2>
 <p>如果 server 需要验证 client 证书，则要给 client 签发证书，步骤与 server 端相同</p>
 <p>创建客户端 SSL key 文件 client.keystore.jks</p>

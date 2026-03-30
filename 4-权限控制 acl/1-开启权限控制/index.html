@@ -18,7 +18,7 @@
         <link rel="prev" href="../">
       
       
-        <link rel="next" href="../2-%E7%A1%AE%E5%AE%9A%20Principal/">
+        <link rel="next" href="../2-%E8%AF%86%E5%88%AB%20User/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -699,11 +699,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../2-%E7%A1%AE%E5%AE%9A%20Principal/" class="md-nav__link">
+      <a href="../2-%E8%AF%86%E5%88%AB%20User/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    4.2 确定 Principal
+    4.2 识别 User
   </span>
   
 
@@ -746,6 +746,27 @@
   
   <span class="md-ellipsis">
     4.4 命令行工具
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5-%E5%B8%B8%E8%A7%81%E5%9C%BA%E6%99%AF%E6%89%80%E9%9C%80%E6%9D%83%E9%99%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.5 常见场景所需权限
   </span>
   
 
@@ -963,13 +984,20 @@
 
 <h1 id="41">4.1 开启权限控制</h1>
 <h2 id="_1">开启权限控制</h2>
-<p>Kafka 提供了权限控制的接口(<code>kafka.security.authorizer.Authorizer</code>)，并且提供了默认的实现，用 zookeeper 存储 acl 规则(默认存储路径 <code>/kafka-acl</code>)。</p>
+<p>Kafka 提供了权限控制的接口(<code>kafka.security.authorizer.Authorizer</code>)，并且提供了默认的实现：</p>
+<ul>
+<li>ZK 模式下，用 zookeeper 存储 acl 规则(默认存储路径 <code>/kafka-acl</code>)。</li>
+<li>KRaft 模式下，增加 <code>ClusterMetadataAuthorizer</code> 接口，使用 <code>__cluster_metadata</code> 存储数据</li>
+</ul>
 <p>通过 <code>authorizer.class.name</code> 指定 Authorizer 后，kafka broker 启动时会初始化该类，并在处理 api 请求时通过该类判断权限：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 2.4 版本之前</span>
 <span class="c1"># authorizer.class.name=kafka.security.auth.SimpleAclAuthorizer</span>
 
 <span class="c1"># 2.4 版本之后建议使用这个</span>
 <span class="na">authorizer.class.name</span><span class="o">=</span><span class="s">kafka.security.authorizer.AclAuthorizer</span>
+
+<span class="c1"># kraft 模式使用这个</span>
+<span class="c1"># authorizer.class.name=org.apache.kafka.metadata.authorizer.StandardAuthorizer</span>
 </code></pre></div>
 <blockquote>
 <p>为了方便自定义 Authorizer，2.4 之后接口由原来的 scala 定义的 kafka.security.authorizer.Authorizer 变为 java 定义的 org.apache.kafka.server.authorizer.Authorizer</p>

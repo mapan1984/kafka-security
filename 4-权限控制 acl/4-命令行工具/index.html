@@ -18,7 +18,7 @@
         <link rel="prev" href="../3-%E5%AE%9A%E4%BD%8D%20acl/">
       
       
-        <link rel="next" href="../../5-%E5%85%B6%E4%BB%96%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/">
+        <link rel="next" href="../5-%E5%B8%B8%E8%A7%81%E5%9C%BA%E6%99%AF%E6%89%80%E9%9C%80%E6%9D%83%E9%99%90/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -641,11 +641,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../2-%E7%A1%AE%E5%AE%9A%20Principal/" class="md-nav__link">
+      <a href="../2-%E8%AF%86%E5%88%AB%20User/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    4.2 确定 Principal
+    4.2 识别 User
   </span>
   
 
@@ -744,12 +744,75 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      添加权限
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      移除权限
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      获取关联权限
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      按场景快速添加权限
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5-%E5%B8%B8%E8%A7%81%E5%9C%BA%E6%99%AF%E6%89%80%E9%9C%80%E6%9D%83%E9%99%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.5 常见场景所需权限
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -941,6 +1004,48 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      添加权限
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      移除权限
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      获取关联权限
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      按场景快速添加权限
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1013,16 +1118,19 @@
 </li>
 <li>Operation<ul>
 <li><code>--operation</code>: 可选的值：<ul>
+<li>All</li>
 <li>Read</li>
 <li>Write</li>
 <li>Create</li>
+<li>Delete</li>
 <li>Alter</li>
 <li>Describe</li>
 <li>ClusterAction</li>
 <li>DescribeConfigs</li>
 <li>AlterConfigs</li>
 <li>IdempotentWrite</li>
-<li>All</li>
+<li>CreateTokens</li>
+<li>DescribeTokens</li>
 </ul>
 </li>
 </ul>
@@ -1035,6 +1143,7 @@
 </li>
 </ul>
 <h2 id="_2">示例</h2>
+<h3 id="_3">添加权限</h3>
 <ol>
 <li>
 <p>允许 User:Bob 或者 User:Alice 从 IP 198.51.100.0 或者 198.51.100.1 读写 Test-topic</p>
@@ -1052,7 +1161,7 @@
 <div class="highlight"><pre><span></span><code>bin/kafka-acls.sh \
     --authorizer-properties zookeeper.connect=localhost:2181 \
     --add \
-    --allow-principal User:* --allow-host * \
+    --allow-principal User:* --allow-host &#39;*&#39; \
     --deny-principal User:BadBob --deny-host 198.51.100.3 \
     --operation Read \
     --topic Test-topic
@@ -1066,15 +1175,7 @@
     --allow-principal User:Peter \
     --allow-host 198.51.200.1 \
     --producer \
-    --topic *
-
-bin/kafka-acls.sh \
-    --authorizer-properties zookeeper.connect=localhost:2181 \
-    --add \
-    --allow-principal User:Peter \
-    --allow-host 198.51.200.1 \
-    --producer \
-    --topic=*
+    --topic &#39;*&#39;
 </code></pre></div>
 </li>
 <li>
@@ -1088,6 +1189,9 @@ bin/kafka-acls.sh \
     --resource-pattern-type prefixed
 </code></pre></div>
 </li>
+</ol>
+<h3 id="_4">移除权限</h3>
+<ol>
 <li>
 <p>移除添加的第 1 条 acl 规则</p>
 <div class="highlight"><pre><span></span><code>bin/kafka-acls.sh \
@@ -1110,81 +1214,74 @@ bin/kafka-acls.sh \
     --resource-pattern-type Prefixed
 </code></pre></div>
 </li>
+</ol>
+<h3 id="_5">获取关联权限</h3>
+<ol>
 <li>
 <p>可以根据 resource 列出关联的 acl 规则列表，比如列出 topic Test-topic 相关联的 acl 规则</p>
 <div class="highlight"><pre><span></span><code>bin/kafka-acls.sh \
---authorizer-properties zookeeper.connect=localhost:2181 \
---list \
---topic Test-topic
+    --authorizer-properties zookeeper.connect=localhost:2181 \
+    --list \
+    --topic Test-topic
 </code></pre></div>
 </li>
 <li>
 <p>可以用 <code>*</code> 表示所有 resource，比如列出所有 topic 的 acl 规则</p>
 <div class="highlight"><pre><span></span><code>bin/kafka-acls.sh \
---authorizer-properties zookeeper.connect=localhost:2181 \
---list \
---topic *
+    --authorizer-properties zookeeper.connect=localhost:2181 \
+    --list \
+    --topic &#39;*&#39;
 </code></pre></div>
 </li>
 <li>
 <p>如果想看特定 resource 关联的所有记录，包括前缀匹配和 <code>*</code>，可以使用 <code>match</code></p>
 <div class="highlight"><pre><span></span><code>bin/kafka-acls.sh \
---authorizer-properties zookeeper.connect=localhost:2181 \
---list \
---topic Test-topic \
---resource-pattern-type match
+    --authorizer-properties zookeeper.connect=localhost:2181 \
+    --list \
+    --topic Test-topic \
+    --resource-pattern-type match
 </code></pre></div>
 </li>
+</ol>
+<h3 id="_6">按场景快速添加权限</h3>
+<ol>
 <li>
 <p><code>--producer</code> 选项可以方便的代表生产消息需要的操作</p>
 <div class="highlight"><pre><span></span><code>bin/kafka-acls.sh \
---authorizer-properties zookeeper.connect=localhost:2181 \
---add \
---allow-principal User:Bob \
---producer \
---topic *
+    --bootstrap-server ${BOOTSTRAP_SERVER} \
+    --add \
+    --allow-principal User:Bob \
+    --producer \
+    --topic &#39;*&#39;
 </code></pre></div>
 </li>
 <li>
 <p><code>--consumer</code> 选项可以方便的代表消费消息需要的操作，并且要与 <code>--group</code> 搭配使用</p>
 <div class="highlight"><pre><span></span><code>bin/kafka-acls.sh \
---authorizer-properties zookeeper.connect=localhost:2181 \
---add \
---allow-principal User:Bob \
---consumer \
---topic * \
---group *
+    --bootstrap-server ${BOOTSTRAP_SERVER} \
+    --add \
+    --allow-principal User:Bob \
+    --consumer \
+    --topic &#39;*&#39; \
+    --group &#39;*&#39;
 </code></pre></div>
 </li>
 <li>
 <p>给用户 Bob 增加 <strong>幂等写</strong> 权限</p>
 <div class="highlight"><pre><span></span><code>kafka-acls.sh \
---authorizer-properties zookeeper.connect=loalhost:2181 \
---add \
---allow-principal User:Bob \
---operation IdempotentWrite
---cluster
-
-Adding ACLs for resource `ResourcePattern(resourceType=CLUSTER, name=kafka-cluster, patternType=LITERAL)`:
-     (principal=User:Bob, host=*, operation=IDEMPOTENT_WRITE, permissionType=ALLOW)
-
-Current ACLs for resource `ResourcePattern(resourceType=CLUSTER, name=kafka-cluster, patternType=LITERAL)`:
-     (principal=User:Bob, host=*, operation=IDEMPOTENT_WRITE, permissionType=ALLOW)
+    --authorizer-properties zookeeper.connect=loalhost:2181 \
+    --add \
+    --allow-principal User:Bob \
+    --operation IdempotentWrite
+    --cluster
 </code></pre></div>
 <p>上述命令也替换成使用 <code>--bootstrap-server</code> 的方式：</p>
 <div class="highlight"><pre><span></span><code>kafka-acls.sh \
---bootstrap-server ${BOOTSTRAP_SERVER} \
---add \
---allow-principal User:* \
---operation IdempotentWrite \
---cluster
-
-kafka-acls.sh \
     --bootstrap-server ${BOOTSTRAP_SERVER} \
     --add \
-    --allow-principal User:alice \
+    --allow-principal User:* \
     --operation IdempotentWrite \
-    --cluster  --command-config /usr/local/ams-worker/conf/kafka.properties
+    --cluster
 </code></pre></div>
 </li>
 <li>
@@ -1192,45 +1289,48 @@ kafka-acls.sh \
 <div class="highlight"><pre><span></span><code>kafka-acls.sh \
     --bootstrap-server ${BOOTSTRAP_SERVER} \
     --add \
-    --resource-pattern-type LITERAL \
+    --allow-principal User:alice \
+    --operation Write
     --transactional-id transaction_id \
-    --allow-principal User:alice \
-    --operation Write
-
-`--resource-pattern-type LITERAL --transactional-id=*` 表示所有事务Id
-
-kafka-acls.sh \
-    --bootstrap-server ${BOOTSTRAP_SERVER} \
-    --add \
     --resource-pattern-type LITERAL \
-    --transactional-id=* \
-    --allow-principal User:alice \
-    --operation Write
 </code></pre></div>
-</li>
-<li>
-<p>给用户 alice 增加事务Id <code>transaction_id</code> 的描述权限：</p>
+<p><code>--resource-pattern-type LITERAL --transactional-id '*'</code> 表示所有事务Id</p>
 <div class="highlight"><pre><span></span><code>kafka-acls.sh \
     --bootstrap-server ${BOOTSTRAP_SERVER} \
     --add \
-    --resource-pattern-type LITERAL \
-    --transactional-id transaction_id \
     --allow-principal User:alice \
-    --operation Describe
+    --operation Write
+    --transactional-id &#39;*&#39; \
+    --resource-pattern-type LITERAL \
 </code></pre></div>
 </li>
 <li>
-<p>删除用户 alice 对事务Id <code>transaction_id</code> 的描述权限：</p>
+<p>给用户增加 describe_configs 权限</p>
 <div class="highlight"><pre><span></span><code>kafka-acls.sh \
     --bootstrap-server ${BOOTSTRAP_SERVER} \
-    --remove \
-    --resource-pattern-type LITERAL \
-    --transactional-id transaction_id \
+    --add \
     --allow-principal User:alice \
-    --operation Describe
+    --operation DescribeConfigs \
+    --topic &#39;*&#39; \
+    --resource-pattern-type LITERAL \
+    --command-config /usr/local/kafka-worker/conf/kafka.properties
+</code></pre></div>
+</li>
+<li>
+<p>给用户增加 describe cluster 权限</p>
+<div class="highlight"><pre><span></span><code>kafka-acls.sh \
+    --bootstrap-server ${BOOTSTRAP_SERVER} \
+    --add \
+    --allow-principal User:alice \
+    --operation Describe \
+    --cluster \
+    --command-config /usr/local/kafka-worker/conf/kafka.properties
 </code></pre></div>
 </li>
 </ol>
+<blockquote>
+<p>在 Linux 命令行中，命令中的 <code>*</code> 通常会被 Shell 展开为匹配到的文件列表，然后再把这些文件名作为参数传给命令，通过 <code>'*'</code> 可以避免 Shell 预展开</p>
+</blockquote>
 
 
 

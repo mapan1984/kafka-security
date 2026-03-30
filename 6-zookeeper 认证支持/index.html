@@ -639,11 +639,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../4-%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%20acl/2-%E7%A1%AE%E5%AE%9A%20Principal/" class="md-nav__link">
+      <a href="../4-%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%20acl/2-%E8%AF%86%E5%88%AB%20User/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    4.2 确定 Principal
+    4.2 识别 User
   </span>
   
 
@@ -686,6 +686,27 @@
   
   <span class="md-ellipsis">
     4.4 命令行工具
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%20acl/5-%E5%B8%B8%E8%A7%81%E5%9C%BA%E6%99%AF%E6%89%80%E9%9C%80%E6%9D%83%E9%99%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.5 常见场景所需权限
   </span>
   
 
@@ -914,6 +935,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="acl 操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      认证方式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      权限
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -992,6 +1037,30 @@
       acl 操作
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="acl 操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      认证方式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      权限
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1075,6 +1144,12 @@ export KAFKA_OPTS=&#39;-Djava.security.auth.login.config=/usr/local/kafka/config
 : r
 </code></pre></div>
 <p>格式为 <code>'&lt;认证方式&gt; '&lt;用户名&gt;: &lt;权限列表&gt;</code></p>
+<h3 id="_1">认证方式</h3>
+<ul>
+<li>IP</li>
+<li>world:anyone</li>
+</ul>
+<h3 id="_2">权限</h3>
 <p>权限分为 5 种：</p>
 <ul>
 <li>c: create</li>

@@ -15,6 +15,10 @@
         <link rel="canonical" href="https://mapan1984.github.io/kafka-security/4-%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%20acl/5-%E5%B8%B8%E8%A7%81%E5%9C%BA%E6%99%AF%E6%89%80%E9%9C%80%E6%9D%83%E9%99%90/">
       
       
+        <link rel="prev" href="../4-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/">
+      
+      
+        <link rel="next" href="../../5-%E5%85%B6%E4%BB%96%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -566,21 +570,21 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           
@@ -602,7 +606,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             4. 权限控制 acl
@@ -637,11 +641,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../2-%E7%A1%AE%E5%AE%9A%20Principal/" class="md-nav__link">
+      <a href="../2-%E8%AF%86%E5%88%AB%20User/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    4.2 确定 Principal
+    4.2 识别 User
   </span>
   
 
@@ -688,6 +692,154 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    4.5 常见场景所需权限
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    4.5 常见场景所需权限
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#acloperation" class="md-nav__link">
+    <span class="md-ellipsis">
+      权限类型 AclOperation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resourcetype" class="md-nav__link">
+    <span class="md-ellipsis">
+      资源类型 ResourceType
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kafkaapis" class="md-nav__link">
+    <span class="md-ellipsis">
+      KafkaApis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="KafkaApis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Admin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#producer-acls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Producer Acls
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consumer-acls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consumer Acls
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#follower" class="md-nav__link">
+    <span class="md-ellipsis">
+      Follower
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acl-acls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acl Acls
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -864,15 +1016,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#acloperation" class="md-nav__link">
     <span class="md-ellipsis">
-      权限之间有隐含的包含关系
+      权限类型 AclOperation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
+  <a href="#resourcetype" class="md-nav__link">
+    <span class="md-ellipsis">
+      资源类型 ResourceType
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kafkaapis" class="md-nav__link">
+    <span class="md-ellipsis">
+      KafkaApis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="KafkaApis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Admin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#producer-acls" class="md-nav__link">
     <span class="md-ellipsis">
       Producer Acls
@@ -880,8 +1060,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#consumer-acls" class="md-nav__link">
     <span class="md-ellipsis">
       Consumer Acls
@@ -889,8 +1069,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#follower" class="md-nav__link">
     <span class="md-ellipsis">
       Follower
@@ -898,9 +1078,23 @@
   </a>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#acl-acls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acl Acls
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       参考
     </span>
@@ -927,10 +1121,25 @@
 
 
 <h1 id="45">4.5 常见场景所需权限</h1>
-<h2 id="_1">权限之间有隐含的包含关系</h2>
-<p>https://github.com/apache/kafka/blob/trunk/clients/src/main/java/org/apache/kafka/common/acl/AclOperation.java</p>
-<p>Represents an operation which an ACL grants or denies permission to perform.</p>
-<p>Some operations imply other operations:</p>
+<h2 id="acloperation">权限类型 AclOperation</h2>
+<ul>
+<li><code>UNKNOWN</code></li>
+<li><code>ANY</code></li>
+<li><code>ALL</code></li>
+<li><code>READ</code></li>
+<li><code>WRITE</code></li>
+<li><code>CREATE</code></li>
+<li><code>DELETE</code></li>
+<li><code>ALTER</code></li>
+<li><code>DESCRIBE</code></li>
+<li><code>CLUSTER_ACTION</code></li>
+<li><code>DESCRIBE_CONFIGS</code></li>
+<li><code>ALTER_CONFIGS</code></li>
+<li><code>IDEMPOTENT_WRITE</code></li>
+<li><code>CREATE_TOKENS</code></li>
+<li><code>DESCRIBE_TOKENS</code></li>
+</ul>
+<p>一些权限之间有隐含的包含关系</p>
 <ul>
 <li><code>ALLOW ALL</code> implies <code>ALLOW</code> everything</li>
 <li><code>DENY ALL</code> implies <code>DENY</code> everything</li>
@@ -940,8 +1149,56 @@
 <li><code>ALLOW ALTER</code> implies <code>ALLOW DESCRIBE</code></li>
 <li><code>ALLOW ALTER_CONFIGS</code> implies <code>ALLOW DESCRIBE_CONFIGS</code></li>
 </ul>
-<p>The API for this class is still evolving and we may break compatibility in minor releases, if necessary.</p>
-<h2 id="producer-acls">Producer Acls</h2>
+<h2 id="resourcetype">资源类型 ResourceType</h2>
+<ul>
+<li><code>UNKNOWN</code></li>
+<li><code>ANY</code></li>
+<li><code>TOPIC</code></li>
+<li><code>GROUP</code></li>
+<li><code>CLUSTER</code></li>
+<li><code>TRANSACTIONAL_ID</code></li>
+<li><code>DELEGATION_TOKEN</code></li>
+<li><code>USER</code></li>
+</ul>
+<h2 id="kafkaapis">KafkaApis</h2>
+<h3 id="admin">Admin</h3>
+<table>
+<thead>
+<tr>
+<th>AclOperation</th>
+<th>ResourceType</th>
+<th>说明</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DESCRIBE</td>
+<td>Topic</td>
+<td></td>
+<td>deleteTopic</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>Topic</td>
+<td></td>
+<td>deleteTopic</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>GROUP</td>
+<td></td>
+<td>deleteGroup</td>
+</tr>
+</tbody>
+</table>
+<h3 id="producer-acls">Producer Acls</h3>
 <table>
 <thead>
 <tr>
@@ -1020,7 +1277,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="consumer-acls">Consumer Acls</h2>
+<h3 id="consumer-acls">Consumer Acls</h3>
 <table>
 <thead>
 <tr>
@@ -1075,7 +1332,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="follower">Follower</h2>
+<h3 id="follower">Follower</h3>
 <table>
 <thead>
 <tr>
@@ -1094,11 +1351,33 @@
 </tr>
 </tbody>
 </table>
-<h2 id="_2">参考</h2>
+<h3 id="acl-acls">Acl Acls</h3>
+<table>
+<thead>
+<tr>
+<th>AclOperation</th>
+<th>ResourceType</th>
+<th>说明</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DESCRIBE</td>
+<td>Cluster</td>
+<td>获取权限配置</td>
+<td>handleDescribeAcls</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_1">参考</h2>
 <ul>
+<li>https://github.com/apache/kafka/blob/trunk/clients/src/main/java/org/apache/kafka/common/acl/AclOperation.java</li>
+<li>https://github.com/apache/kafka/blob/trunk/clients/src/main/java/org/apache/kafka/common/resource/ResourceType.java</li>
 <li>https://medium.com/@nzaporozhets/getting-started-with-kafka-acls-14b16bbf83d1</li>
 <li>https://docs.confluent.io/platform/current/kafka/authorization.html#operations</li>
 <li>https://kafka.apache.org/27/documentation.html#operations_resources_and_protocols</li>
+<li>https://kafka.apache.org/41/security/authorization-and-acls/#operations-and-resources-on-protocols</li>
 </ul>
 
 
